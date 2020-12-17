@@ -1,5 +1,5 @@
-- hosts: awsHTTPserver
-  become: true
+- hosts: awsHTTPserver #To manage the target node you can change this line with ip files directory.
+  become: true #  privilege escalation systems to execute tasks with root privileges or with another user's permissions
   tasks:
 
   - name: "installing http packges"
@@ -21,7 +21,8 @@
          name: "httpd"
          state: started
          enabled: yes
- 
+         
+# add follwing line of code while configuring the haproxy on local system vm's
 #  - firewalld:
 #        port: "80/tcp"
 #        state: enabled
@@ -31,7 +32,7 @@
 
   
 
-- hosts: awsHAproxy
+- hosts: awsHAproxy #you can change this 127.0.0.1 when you wanted to confgure load balancer over controller node
   become: true
   tasks:
 
