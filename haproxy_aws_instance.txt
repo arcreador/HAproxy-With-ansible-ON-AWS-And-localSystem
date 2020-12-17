@@ -1,0 +1,6 @@
+[awsHAproxy]
+13.233.178.60 ansible_user=ec2-user ansible_ssh_private_key_file=/root/aws-mumbai.pem ansible_connection=ssh 
+
+[awsHTTPserver]
+13.233.190.92 ansible_user=ec2-user ansible_ssh_private_key_file=/root/aws-mumbai.pem ansible_connection=ssh 
+65.0.102.57 ansible_user=ec2-user ansible_ssh_private_key_file=/root/aws-mumbai.pem ansible_connection=ssh 

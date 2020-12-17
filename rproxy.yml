@@ -1,0 +1,52 @@
+- hosts: awsHTTPserver
+  become: true
+  tasks:
+
+  - name: "installing http packges"
+    package: 
+         name: "httpd"
+         state: present
+
+  - name: "installing php"
+    package: 
+         name: "php"
+         state: present
+
+  - name: "coping file"
+    copy:
+        src: "index.php"
+        dest: "/var/www/html/"
+
+  - service: 
+         name: "httpd"
+         state: started
+         enabled: yes
+ 
+#  - firewalld:
+#        port: "80/tcp"
+#        state: enabled
+#        permanent: yes
+#        immediate: yes
+ 
+
+  
+
+- hosts: awsHAproxy
+  become: true
+  tasks:
+
+  - package:
+       name: "haproxy"
+       state: present 
+ 
+  - template:
+         src: haproxy.cfg.j2
+         dest: "/etc/haproxy/haproxy.cfg"
+    register: status
+
+  - service:
+         name: "haproxy"
+         state: restarted
+    when: status.changed == true
+
+
